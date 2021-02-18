@@ -36,7 +36,6 @@ function rollRoom() {
   var room = cloneDeep(rollTheRoom());
   const exitCount = rollDie(4);
   var positions = shuffle(exitPositionDeck);
-  console.log('positions', positions);
   for (var i = 0; i < exitCount; ++i) {
     const position = positions[i];
     let kind;

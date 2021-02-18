@@ -94,16 +94,34 @@ td {
 }
 
 .label:after {
-  content: " →";
+  content: ": ";
 }
 
 .label {
   margin: 0.5em;
-  background-color: #ff8;
 }
 
 .value {
   font-weight: bold;
+}
+
+/* Hide array indexes. */
+ul.array > li > span.label {
+  display: none;
+}
+
+ul.list {
+  list-style-type: none;
+}
+
+.list li {
+  margin-bottom: 0.2rem;
+}
+
+#floors-root > li > ul > li {
+  border: 1px solid hsla(0, 0%, 0%, 0.2);
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
 }
 
 @media all and (max-height: 568px) {

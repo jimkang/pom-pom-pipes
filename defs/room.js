@@ -7,12 +7,10 @@ var cloneDeep = require('lodash.clonedeep');
 var roomDef = {
   root: [[1, r({ name: '', roomType: r`roomType`, exits: [], pool: r`pool` })]],
   roomType: [
-    [2, { shape: 'room', size: 'small', height: 'short' }],
-    [1, { shape: 'room', size: 'small', height: 'tall' }],
-    [4, { shape: 'room', size: 'medium', height: 'short' }],
-    [1, { shape: 'room', size: 'big', height: 'short' }],
-    [1, { shape: 'room', size: 'big', height: 'tall' }],
-    [1, { shape: 'pipe', size: 'big', height: 'short' }]
+    [3, { shape: 'room', size: 'small' }],
+    [4, { shape: 'room', size: 'medium' }],
+    [3, { shape: 'room', size: 'big' }],
+    [1, { shape: 'pipe', size: 'big' }]
   ],
   pool: r({
     kind: r`poolKind`,
@@ -32,14 +30,14 @@ var exitPositionDeck = ['north', 'east', 'south', 'west', 'floor'];
 
 var wallExitKindTable = createTableFromSizes([
   [1, { kind: 'direct connection' }],
-  [2, { kind: 'pipe', orientation: 'vertical' }],
-  [1, { kind: 'pipe', orientation: 'vertical', rungs: true }],
+  [3, { kind: 'pipe', orientation: 'horizontal' }],
   [2, { kind: 'pipe', orientation: 'sloped' }]
 ]);
 
 var floorExitKindTable = createTableFromSizes([
   [1, { kind: 'direct connection' }],
-  [3, { kind: 'pipe', orientation: 'horizontal' }],
+  [2, { kind: 'pipe', orientation: 'vertical' }],
+  [1, { kind: 'pipe', orientation: 'vertical', rungs: true }],
   [2, { kind: 'pipe', orientation: 'sloped' }]
 ]);
 

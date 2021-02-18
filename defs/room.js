@@ -1,4 +1,4 @@
-var { rollDie, shuffle, createTableFromSizes } = require('probable');
+var { pick, rollDie, shuffle, createTableFromSizes } = require('probable');
 var { Tablenest, r, d } = require('tablenest');
 var tablenest = Tablenest();
 var cloneDeep = require('lodash.clonedeep');
@@ -50,6 +50,59 @@ var barrierRoll = tablenest({
   lock: [[6, 'none'], [3, 'keyA'], [2, 'keyB'], [1, 'keyC']]
 });
 
+var items = [
+  'Key A',
+  'Key B',
+  'Key C',
+  'Bounce pad',
+  'Throwing disc',
+  'Pom pom',
+  'Vaulting pole',
+  'Stick',
+  'Escape pod',
+  'Orb',
+  'The Claw',
+  'Chain',
+  'Wrench',
+  'Stone',
+  'Shovel',
+  'Propeller hat',
+  'Scissors',
+  'Sword',
+  'Bag of gold (1d3)',
+  'Ladder',
+  'Crowbar',
+  'Shellmet',
+  'Lightning trap',
+  'Diving gear'
+];
+
+var npcs = [
+  'Wooper',
+  'Shyguy',
+  'Ninja',
+  'Goons',
+  'Skull Jones',
+  'Slime',
+  'Pyramidtron',
+  'Stone owl',
+  'Pom Pom Monster',
+  'Bad Squig',
+  'Good Squig',
+  'Slime Ghost Hand',
+  'Dwarf',
+  'Yeti',
+  'Two-headed goon',
+  'Skeleton',
+  'Blocksbot',
+  'Huckle',
+  'The crow',
+  'Stegosaurus',
+  'Dino suit rabbit',
+  'Turtle',
+  'Ivysaur and Wartortle'
+];
+
 var rollTheRoom = tablenest(roomDef);
 
 function rollRoom(name) {
@@ -69,6 +122,13 @@ function rollRoom(name) {
     let exit = Object.assign({}, kindEtc, { position });
     exit.barrier = barrierRoll();
     room.exits.push(exit);
+  }
+
+  if (rollDie(3) < 5) {
+    room.items = pick(items);
+  }
+  if (rollDie(3) < 5) {
+    room.npcs = pick(npcs);
   }
 
   return room;

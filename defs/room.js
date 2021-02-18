@@ -1,5 +1,5 @@
 var { rollDie, shuffle, createTableFromSizes } = require('probable');
-var { Tablenest, r } = require('tablenest');
+var { Tablenest, r, d } = require('tablenest');
 var tablenest = Tablenest();
 var cloneDeep = require('lodash.clonedeep');
 //var range = require('d3-array').range;
@@ -24,11 +24,21 @@ var wallExitKindTable = createTableFromSizes([
   [1, { kind: 'pipe', orientation: 'vertical', rungs: true }],
   [2, { kind: 'pipe', orientation: 'sloped' }]
 ]);
+
 var floorExitKindTable = createTableFromSizes([
   [1, { kind: 'direct connection' }],
   [3, { kind: 'pipe', orientation: 'horizontal' }],
   [2, { kind: 'pipe', orientation: 'sloped' }]
 ]);
+
+var barrierRoll = tablenest({
+  root: [
+    [2, r({ kind: 'door', lock: r`lock` })],
+    [5, { kind: 'none' }],
+    [2, r({ kind: 'hatch', DC: d`d8+d12+2` })]
+  ],
+  lock: [[6, 'none'], [3, 'keyA'], [2, 'keyB'], [1, 'keyC']]
+});
 
 var rollTheRoom = tablenest(roomDef);
 
@@ -45,7 +55,9 @@ function rollRoom() {
       kindEtc = wallExitKindTable.roll();
     }
 
-    room.exits.push(Object.assign({}, kindEtc, { position }));
+    let exit = Object.assign({}, kindEtc, { position });
+    exit.barrier = barrierRoll();
+    room.exits.push(exit);
   }
 
   return room;

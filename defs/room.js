@@ -5,7 +5,7 @@ var cloneDeep = require('lodash.clonedeep');
 //var range = require('d3-array').range;
 
 var roomDef = {
-  root: [[1, r({ roomType: r`roomType`, exits: [] })]],
+  root: [[1, r({ roomType: r`roomType`, exits: [], pool: r`pool` })]],
   roomType: [
     [2, { shape: 'room', size: 'small', height: 'short' }],
     [1, { shape: 'room', size: 'small', height: 'tall' }],
@@ -13,7 +13,19 @@ var roomDef = {
     [1, { shape: 'room', size: 'big', height: 'short' }],
     [1, { shape: 'room', size: 'big', height: 'tall' }],
     [1, { shape: 'pipe', size: 'big', height: 'short' }]
-  ]
+  ],
+  pool: r({
+    kind: r`poolKind`,
+    tileCount: r`poolSize`
+  }),
+  poolKind: [
+    [4, 'none'],
+    [3, 'water'],
+    [1, 'lava'],
+    [2, 'slime'],
+    [2, 'bubble wrap']
+  ],
+  poolSize: [[3, 1], [3, 2], [2, 3], [1, 4]]
 };
 
 var exitPositionDeck = ['north', 'east', 'south', 'west', 'floor'];

@@ -19,15 +19,15 @@ var roomDef = {
 var exitPositionDeck = ['north', 'east', 'south', 'west', 'floor'];
 
 var wallExitKindTable = createTableFromSizes([
-  [1, 'direct connection'],
-  [2, 'pipe, vertical'],
-  [1, 'pipe, vertical, with rungs'],
-  [2, 'pipe, sloped']
+  [1, { kind: 'direct connection' }],
+  [2, { kind: 'pipe', orientation: 'vertical' }],
+  [1, { kind: 'pipe', orientation: 'vertical', rungs: true }],
+  [2, { kind: 'pipe', orientation: 'sloped' }]
 ]);
 var floorExitKindTable = createTableFromSizes([
-  [1, 'direct connection'],
-  [3, 'pipe, horizontal'],
-  [2, 'pipe, sloped']
+  [1, { kind: 'direct connection' }],
+  [3, { kind: 'pipe', orientation: 'horizontal' }],
+  [2, { kind: 'pipe', orientation: 'sloped' }]
 ]);
 
 var rollTheRoom = tablenest(roomDef);
@@ -38,13 +38,14 @@ function rollRoom() {
   var positions = shuffle(exitPositionDeck);
   for (var i = 0; i < exitCount; ++i) {
     const position = positions[i];
-    let kind;
+    let kindEtc;
     if (position === 'floor') {
-      kind = floorExitKindTable.roll();
+      kindEtc = floorExitKindTable.roll();
     } else {
-      kind = wallExitKindTable.roll();
+      kindEtc = wallExitKindTable.roll();
     }
-    room.exits.push({ position, kind });
+
+    room.exits.push(Object.assign({}, kindEtc, { position }));
   }
 
   return room;

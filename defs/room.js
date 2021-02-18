@@ -5,7 +5,7 @@ var cloneDeep = require('lodash.clonedeep');
 //var range = require('d3-array').range;
 
 var roomDef = {
-  root: [[1, r({ roomType: r`roomType`, exits: [], pool: r`pool` })]],
+  root: [[1, r({ name: '', roomType: r`roomType`, exits: [], pool: r`pool` })]],
   roomType: [
     [2, { shape: 'room', size: 'small', height: 'short' }],
     [1, { shape: 'room', size: 'small', height: 'tall' }],
@@ -54,8 +54,9 @@ var barrierRoll = tablenest({
 
 var rollTheRoom = tablenest(roomDef);
 
-function rollRoom() {
+function rollRoom(name) {
   var room = cloneDeep(rollTheRoom());
+  room.name = name;
   const exitCount = rollDie(4);
   var positions = shuffle(exitPositionDeck);
   for (var i = 0; i < exitCount; ++i) {

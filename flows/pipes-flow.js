@@ -1,15 +1,14 @@
 var RenderAsNestedList = require('render-as-nested-list');
 var renderAsNestedList = RenderAsNestedList({});
 
-function pipesFlow({ floors }) {
-  console.log(floors);
-  var floorsEl = document.getElementById('floors-root');
-  floorsEl.innerHTML = '';
+function pipesFlow({ rooms }) {
+  var roomsEl = document.getElementById('rooms-root');
+  roomsEl.innerHTML = '';
 
   renderAsNestedList({
-    targetListEl: floorsEl,
+    targetListEl: roomsEl,
     name: 'root',
-    thing: floors
+    thing: rooms
   });
 }
 

@@ -118,7 +118,7 @@ ul.list {
   margin-bottom: 0.2rem;
 }
 
-#floors-root > li > ul > li {
+#rooms-root > li > ul > li {
   border: 1px solid hsla(0, 0%, 0%, 0.2);
   border-radius: 4px;
   margin-bottom: 0.5rem;

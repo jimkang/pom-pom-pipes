@@ -3,21 +3,17 @@ var wireControls = require('./dom/wire-controls');
 var pipesFlow = require('./flows/pipes-flow');
 var rollRoom = require('./defs/room');
 
-var floors = [];
+var rooms = [];
 
 (function go() {
   window.onerror = reportTopLevelError;
   wireControls({ addRoom, rerollRoom });
-  pipesFlow({ floors });
+  pipesFlow({ rooms });
 })();
 
 function addRoom() {
-  var floor = [];
-  if (floors.length > 0) {
-    floors[floor.length - 1];
-  }
-  floors.push(rollRoom());
-  pipesFlow({ floors });
+  rooms.push(rollRoom(rooms.length));
+  pipesFlow({ rooms });
 }
 
 function rerollRoom() {}

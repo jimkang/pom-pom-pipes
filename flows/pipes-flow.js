@@ -5,6 +5,7 @@ function pipesFlow({ rooms }) {
   var roomsEl = document.getElementById('rooms-root');
   roomsEl.innerHTML = '';
 
+  localStorage.setItem('rooms', JSON.stringify(rooms));
   renderAsNestedList({
     targetListEl: roomsEl,
     name: 'root',

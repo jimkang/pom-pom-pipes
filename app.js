@@ -16,7 +16,14 @@ function addRoom() {
   pipesFlow({ rooms });
 }
 
-function rerollRoom() {}
+function rerollRoom() {
+  const index = rooms.length - 1;
+  if (index < 0) {
+    return;
+  }
+  rooms[index] = rollRoom(index);
+  pipesFlow({ rooms });
+}
 
 function reportTopLevelError(msg, url, lineNo, columnNo, error) {
   handleError(error);

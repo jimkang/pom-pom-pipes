@@ -1,7 +1,7 @@
 {
   "name": "pom-pom-pipes",
   "version": "1.0.0",
-  "description": "Makes slime intelligences. (A game supplement.)",
+  "description": "Makes rooms in a sewer. (A game supplement.)",
   "main": "index.js",
   "private": true,
   "scripts": {

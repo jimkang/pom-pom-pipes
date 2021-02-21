@@ -8,6 +8,10 @@ var rooms = [];
 (function go() {
   window.onerror = reportTopLevelError;
   wireControls({ addRoom, rerollRoom });
+  var serializedRooms = localStorage.getItem('rooms');
+  if (serializedRooms) {
+    rooms = JSON.parse(serializedRooms);
+  }
   pipesFlow({ rooms });
 })();
 
